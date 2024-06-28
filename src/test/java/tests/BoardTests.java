@@ -26,5 +26,64 @@ public class BoardTests {
         assertEquals(nextBoard.state(), ".");
     }
 
+    @Test
+    public void should_return_row_board_with_dead_cells_given_row_board_with_alive_cells(){
+        Board board = new Board("XX.");
+        Board nextBoard = board.next();
+        assertEquals(nextBoard.state(), "...");
+    }
+
+    @Test
+    public void should_return_board_2x2_with_all_dead_cells_given_2x2_board_with_all_dead_cells(){
+        Board board = new Board("""
+                ..
+                ..
+                """.trim());
+        Board nextBoard = board.next();
+        assertEquals(nextBoard.state(), """
+                ..
+                ..
+                """.trim());
+    }
+
+    @Test
+    public void should_return_board_2x2_with_all_alive_cells_given_2x2_board_with_all_alive_cells(){
+        Board board = new Board("""
+                XX
+                XX
+                """.trim());
+        Board nextBoard = board.next();
+        assertEquals(nextBoard.state(), """
+                XX
+                XX
+                """.trim());
+    }
+
+    @Test
+    public void should_return_board_2x2_with_all_alive_cells_given_2x2_board_with_triangle_structure(){
+        Board board = new Board("""
+                X.
+                XX
+                """.trim());
+        Board nextBoard = board.next();
+        assertEquals(nextBoard.state(), """
+                XX
+                XX
+                """.trim());
+    }
+
+    @Test
+    public void should_return_board_2x2_with_all_dead_cells_given_2x2_board_with_one_alive_cell(){
+        Board board = new Board("""
+                .X
+                ..
+                """.trim());
+        Board nextBoard = board.next();
+        assertEquals(nextBoard.state(), """
+                ..
+                ..
+                """.trim());
+    }
+
 
 }
