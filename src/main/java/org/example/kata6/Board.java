@@ -11,13 +11,16 @@ import static java.util.stream.IntStream.range;
 public class Board {
 
     private final String[] state;
+    private final char aliveCell = 'X';
+    private final char deadCell = '.';
+    private final String lineBreak = "\n";
 
     public Board(String state) {
-        this.state = state.split("\n");
+        this.state = state.split(lineBreak);
     }
 
     public String state() {
-        return String.join("\n", this.state);
+        return String.join(lineBreak, this.state);
     }
 
     public Board next() {
@@ -26,7 +29,7 @@ public class Board {
 
     private String calculate() {
         return range(0, state.length)
-                .mapToObj(i -> calculate(i) + "\n")
+                .mapToObj(i -> calculate(i) + lineBreak)
                 .collect(Collectors.joining());
     }
 
@@ -37,7 +40,7 @@ public class Board {
     }
 
     private char calculate(int i, int j) {
-        return shouldBeAlive(i, j) ? 'X' : '.';
+        return shouldBeAlive(i, j) ? aliveCell : deadCell;
     }
 
     private boolean shouldBeAlive(int i, int j) {
@@ -66,7 +69,11 @@ public class Board {
     }
 
     private boolean isAlive(int i, int j) {
-        return isInBounds(i, j) && state[i].charAt(j) == 'X';
+        return isInBounds(i, j) && cellAt(i, j) == aliveCell;
+    }
+
+    private char cellAt(int i, int j) {
+        return state[i].charAt(j);
     }
 
     private boolean isInBounds(int i, int j) {
