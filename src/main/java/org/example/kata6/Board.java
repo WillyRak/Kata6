@@ -41,7 +41,9 @@ public class Board {
     }
 
     private boolean shouldBeAlive(int i, int j) {
-        return countAliveNeighbours(i,j) == 2 || countAliveNeighbours(i, j) == 3;
+        return isAlive(i, j) ?
+                countAliveNeighbours(i,j) == 2 || countAliveNeighbours(i, j) == 3 :
+                countAliveNeighbours(i, j) == 3;
     }
 
     private int countAliveNeighbours(int i, int j) {

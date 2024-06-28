@@ -85,5 +85,35 @@ public class BoardTests {
                 """.trim());
     }
 
+    @Test
+    public void should_return_board_3x3_with_alive_cells_in_corners_given_board_3x3_with_all_alive_cells(){
+        Board board = new Board("""
+                XXX
+                XXX
+                XXX
+                """.trim());
+        Board nextBoard = board.next();
+        assertEquals(nextBoard.state(), """
+                X.X
+                ...
+                X.X
+                """.trim());
+    }
+
+    @Test
+    public void should_return_board_3x3_with_middle_row_alive_cells_given_board_3x3_with_middle_column_alive_cells(){
+        Board board = new Board("""
+                .X.
+                .X.
+                .X.
+                """.trim());
+        Board nextBoard = board.next();
+        assertEquals(nextBoard.state(), """
+                ...
+                XXX
+                ...
+                """.trim());
+    }
+
 
 }
